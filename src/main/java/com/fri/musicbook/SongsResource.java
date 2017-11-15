@@ -3,6 +3,8 @@ package com.fri.musicbook;
 
 
 
+import javax.enterprise.context.ApplicationScoped;
+import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
@@ -13,41 +15,63 @@ import javax.ws.rs.core.Response;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import com.fri.musicbook.*;
 
-@Consumes(MediaType.APPLICATION_JSON)
-@Produces(MediaType.APPLICATION_JSON)
+
+@ApplicationScoped
+@Consumes(MediaType.APPLICATION_JSON+ ";charset=utf-8")
+@Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/songs")
-public class SongsREST {
+public class SongsResource {
+
+    @Inject
+    private SongsBean SongsBean;
+
     @GET
     public Response getAllSongs(){
-        List<Song> songs =SongsDB.getSongs();
+        List<Song> songs =SongsBean.getSongs();
         return Response.ok(songs).build();
     }
 
     @GET
-    @Path("/query")
-    public Response getSong(@QueryParam("id") Integer id){
-        Song song=SongsDB.getSongById(id);
+    @Path("/by_song_id")
+    public Response getSongBySongId(@QueryParam("id") Integer id){
+        Song song=SongsBean.getSongById(id);
 
         // pridobivanje podatkov iz drugih MS
-        List<Album> albums=getAlbums(song.getAlbumId());
-        song.setAlbums(albums);
+        //List<Album> albums=getAlbums(song.getAlbumIds());
+        //song.setAlbumIds(albums);
 
 
 
 
         if(song==null) return Response.status(Response.Status.NOT_FOUND).build();
-        else return Response.ok(SongsDB.getSongById(id)).build();
+        else return Response.ok(SongsBean.getSongById(id)).build();
+    }
+
+    @GET
+    @Path("/by_album_id")
+    public Response getSongByAlbumId(@QueryParam("id") Integer id){
+        Song song=SongsBean.getSongByAlbumId(id);
+
+        // pridobivanje podatkov iz drugih MS
+        //List<Album> albums=getAlbums(song.getAlbumIds());
+        //song.setAlbumIds(albums);
+
+
+
+
+        if(song==null) return Response.status(Response.Status.NOT_FOUND).build();
+        else return Response.ok(SongsBean.getSongById(id)).build();
     }
 
 
     @POST
     public Response addNewSong(Song song){
         if  (
-                   song.getId() != 0
-                && song.getName()!= null && song.getName().isEmpty() != true         // ime mora obstajat
-                && song.getArtistId()!= null && song.getArtistId().isEmpty()!=true   // artist mora obstajat
-                && SongsDB.addSong(song)                                             // more bit zadna pri preverjanju ker doda komad v db
+                   song.getSongId() != 0
+                && song.getSongName()!= null && song.getSongName().isEmpty() != true         // ime mora obstajati
+                && SongsBean.createSong(song)!=null                                             // more bit zadna pri preverjanju ker doda komad v db
             )
             return Response.status(Response.Status.CREATED).entity(song).build();
 
