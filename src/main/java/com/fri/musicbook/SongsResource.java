@@ -52,7 +52,7 @@ public class SongsResource {
     @GET
     @Path("/by_album_id")
     public Response getSongByAlbumId(@QueryParam("id") Integer id){
-        Song song=SongsBean.getSongByAlbumId(id);
+        List<Song> songs=SongsBean.getSongByAlbumId(id);
 
         // pridobivanje podatkov iz drugih MS
         //List<Album> albums=getAlbums(song.getAlbumIds());
@@ -61,8 +61,8 @@ public class SongsResource {
 
 
 
-        if(song==null) return Response.status(Response.Status.NOT_FOUND).build();
-        else return Response.ok(SongsBean.getSongById(id)).build();
+        if(songs==null) return Response.status(Response.Status.NOT_FOUND).build();
+        else return Response.ok(songs).build();
     }
 
 
@@ -78,32 +78,6 @@ public class SongsResource {
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
 
-    // http req
-
-    private List<Album> getAlbums(List<Integer> albumIds){
-        Optional<String> albumURL= Optional.of("http://192.168.99.100:1000");
-        Client httpClient = ClientBuilder.newClient();
-        List<Album> albums=new ArrayList<Album>();
-
-            if (albumURL.isPresent()) {
-                for (Integer albumId : albumIds) {
-                    try {
-                        albums.add(httpClient
-                                .target(albumURL.get() + "/v1/albums/query?id=" + albumId)
-                                .request().get(new GenericType<Album>() {
-                                })
-                        );
-                    } catch (WebApplicationException | ProcessingException e) {
-                        System.out.println(e);
-                        throw new InternalServerErrorException(e);
-                    }
-                }
-            } else {
-                    return null;
-            }
-            return albums;
-
-    }
 
 
 

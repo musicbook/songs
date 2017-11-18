@@ -22,11 +22,10 @@ public class SongsBean {
         return song;
     }
 
-    public Song getSongByAlbumId(Integer albumId){
+    public List<Song> getSongByAlbumId(Integer albumId){
         Query query=em.createNamedQuery("songs.getSongByAlbumId",Song.class).setParameter("albumId",albumId);
-        Object result= query.getSingleResult();
-        if(result==null) return null;
-        return (Song) result;
+        return query.getResultList();
+
     }
 
     public Song createSong(Song song){
