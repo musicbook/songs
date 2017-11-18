@@ -65,11 +65,7 @@
 			<groupId>com.kumuluz.ee</groupId>
 			<artifactId>kumuluzee-cdi-weld</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.fri.musicbook</groupId>
-			<artifactId>albums</artifactId>
-			<version>1.0-SNAPSHOT</version>
-		</dependency>
+
 
 
 	</dependencies>
