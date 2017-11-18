@@ -1,0 +1,17 @@
+version: "3"
+services:
+  postgres:
+    image: postgres:latest
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=songs
+    ports:
+      - "5432:5432"
+  songs-service:
+    image: cleptes/songs:0.01
+    environment:
+      - KUMULUZEE_DATASOURCES0_CONNECTIONURL=jdbc:postgresql://postgres:5432/songs
+    ports:
+      - "8081:8081"
+    depends_on:
+      - postgres

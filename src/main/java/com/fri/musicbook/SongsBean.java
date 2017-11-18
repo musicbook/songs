@@ -4,8 +4,11 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.persistence.Query;
+import javax.ws.rs.core.UriInfo;
 import java.util.List;
 import com.fri.musicbook.Song;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 
 @ApplicationScoped
 public class SongsBean {
@@ -72,6 +75,16 @@ public class SongsBean {
         }else return false;
 
         return true;
+    }
+
+    public List<Song> getSongsFilter(UriInfo uriInfo) {
+
+        QueryParameters queryParameters = QueryParameters.query(uriInfo.getRequestUri().getQuery()).defaultOffset(0)
+                .build();
+
+        List<Song> songs = JPAUtils.queryEntities(em, Song.class, queryParameters);
+
+        return songs;
     }
 
 

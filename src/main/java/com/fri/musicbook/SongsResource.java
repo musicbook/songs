@@ -8,14 +8,14 @@ import javax.inject.Inject;
 import javax.ws.rs.*;
 import javax.ws.rs.client.Client;
 import javax.ws.rs.client.ClientBuilder;
-import javax.ws.rs.core.GenericType;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
+import javax.ws.rs.core.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.fri.musicbook.*;
+import com.kumuluz.ee.rest.beans.QueryParameters;
+import com.kumuluz.ee.rest.utils.JPAUtils;
 
 
 @ApplicationScoped
@@ -24,14 +24,27 @@ import com.fri.musicbook.*;
 @Path("/songs")
 public class SongsResource {
 
+    @Context
+    protected UriInfo uriInfo;
+
     @Inject
     private SongsBean SongsBean;
 
     @GET
+    public Response getSongsFiltered() {
+
+        List<Song> customers;
+
+        customers = SongsBean.getSongsFilter(uriInfo);
+
+        return Response.status(Response.Status.OK).entity(customers).build();
+    }
+    /*
+    @GET
     public Response getAllSongs(){
         List<Song> songs =SongsBean.getSongs();
         return Response.ok(songs).build();
-    }
+    }*/
 
     @GET
     @Path("/by_song_id")
@@ -64,6 +77,7 @@ public class SongsResource {
         if(songs==null) return Response.status(Response.Status.NOT_FOUND).build();
         else return Response.ok(songs).build();
     }
+
 
 
     @POST
