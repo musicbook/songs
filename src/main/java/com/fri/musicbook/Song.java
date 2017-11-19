@@ -18,7 +18,7 @@ public class Song {
     @Column(name="album_id")
     private Integer albumId;
 
-//    private List<Integer> creatorId;
+//    private List<Integer> creatorId; //
 
 
 
