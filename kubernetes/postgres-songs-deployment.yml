@@ -10,14 +10,12 @@ spec:
         app: postgres-songs
     spec:
       containers:
-        - image: centos/postgresql-94-centos7
+        - image: postgres
           name: postgres-songs
           env:
-            - name: POSTGRESQL_USER
-              value: dbuser
-            - name: POSTGRESQL_PASSWORD
+            - name: POSTGRES_PASSWORD
               value: postgres
-            - name: POSTGRESQL_DATABASE
+            - name: POSTGRES_DB
               value: songs
           ports:
           - containerPort: 5433

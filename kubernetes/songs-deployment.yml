@@ -21,9 +21,11 @@ spec:
             value: http://etcd:2379
           - name: KUMULUZEE_DATASOURCES0_CONNECTIONURL
             value: jdbc:postgresql://postgres-songs:5433/songs
-          - name: KUMULUZEE_SERVER_BASEURL
-            value: http://169.51.13.134:32696
+          - name: KUMULUZEE_DATASOURCES0_USERNAME
+            value: postgres
+          - name: KUMULUZEE_DATASOURCES0_PASSWORD
+            value: postgres
         ports:
         - containerPort: 8081
-          name: server
-          protocol: TCP
+          #name: server
+          #protocol: TCP
