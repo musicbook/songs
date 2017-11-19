@@ -14,11 +14,11 @@ spec:
           name: postgres-songs
           env:
             - name: POSTGRESQL_USER
-              value: dbuser
+              value: userdb
             - name: POSTGRESQL_PASSWORD
               value: postgres
             - name: POSTGRESQL_DATABASE
               value: songs
           ports:
-          - containerPort: 5433
+          - containerPort: 5432
             protocol: TCP
