@@ -5,7 +5,7 @@ metadata:
 spec:
   type: ClusterIP
   ports:
-  - port: 5432
+  - port: 5433 #na tega se connectajo servici
     protocol: TCP
     targetPort: 5432
   selector:
