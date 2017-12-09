@@ -1,5 +1,5 @@
 kumuluzee:
-  name: songs-service
+  name: songs
   env:
     name: dev
   version: 1.0.0
