@@ -19,3 +19,9 @@ kumuluzee:
         username: postgres
         password: postgres
         max-pool-size: 20
+  metrics:
+      web-instrumentation:
+        - name: metricsEndpoint
+          url-pattern: /metrics/*
+        - name: customersEndpoint
+          url-pattern: /v1/songs/*

@@ -61,7 +61,7 @@ public class SongsBean {
         return song;
     }
 
-    public boolean deleteSong(Integer songId){
+    public boolean deleteSong(int songId){
         Song song=em.find(Song.class,songId);
         if(song!=null) {
             try {

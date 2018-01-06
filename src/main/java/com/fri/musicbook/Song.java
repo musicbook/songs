@@ -18,6 +18,15 @@ public class Song {
     @Column(name="album_id")
     private Integer albumId;
 
+    public Song(int songId, String songName, Integer albumId) {
+        this.songId = songId;
+        this.songName = songName;
+        this.albumId = albumId;
+    }
+
+    public Song() {
+    }
+
 //    private List<Integer> creatorId; //
 
 
