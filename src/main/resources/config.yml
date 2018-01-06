@@ -19,6 +19,10 @@ kumuluzee:
         username: postgres
         password: postgres
         max-pool-size: 20
+  health:
+    checks:
+      data-source-health-check:
+        jndi-name: jdbc/SongsDS
   metrics:
       web-instrumentation:
         - name: metricsEndpoint
