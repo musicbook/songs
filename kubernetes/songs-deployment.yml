@@ -27,6 +27,8 @@ spec:
             value: postgres
           - name: KUMULUZEE_SERVER_BASEURL
             value: http://169.51.16.117:32280
+          - name: KUMULUZEE_VERSION
+            value: 1.0.1
         ports:
         - containerPort: 8081
           name: server

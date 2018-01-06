@@ -14,6 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import com.fri.musicbook.*;
+import com.kumuluz.ee.logs.cdi.Log;
 import com.kumuluz.ee.rest.beans.QueryParameters;
 import com.kumuluz.ee.rest.utils.JPAUtils;
 import org.eclipse.microprofile.metrics.annotation.Metered;
@@ -24,6 +25,7 @@ import org.eclipse.microprofile.metrics.annotation.Metered;
 @Produces(MediaType.APPLICATION_JSON+ ";charset=utf-8")
 @Path("/songs")
 @Metered(name = "SongResources")
+@Log
 public class SongsResource {
 
     @Context
