@@ -1,3 +1,4 @@
+
 INSERT INTO songs (song_id, song_name, album_id) VALUES (1, 'Za Kosti Otca', 1);
 INSERT INTO songs (song_id, song_name, album_id) VALUES (2, 'Ustaj Mati Zemljo', 1);
 INSERT INTO songs (song_id, song_name, album_id) VALUES (3, 'Dabog', 1);
